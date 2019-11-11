@@ -42,18 +42,35 @@ function register(statusDino) {
     const tRexContext  = context.tRex;
     const hurdleContext = context.horizon.obstacles[0];
 
+    var jumpStatus = "";
+
+    if (tRexContext.jumpVelocity < -5 && statusDino == JUMP) {
+        jumpStatus = "Pulo Pequeno";
+    } else if(tRexContext.jumpVelocity >= -5 && statusDino == JUMP) {
+        jumpStatus = "Pulo Grande";
+    } else {
+        jumpStatus = "Não pulou";
+    }
+
     const tRex = {
-        xPos: tRexContext.xPos,
-        yPos: tRexContext.yPos
+        // tRex_xPos: tRexContext.xPos,
+        // tRex_yPos: tRexContext.yPos,
+        tRex_jumpForce: jumpStatus
     }
 
     const nextHurdle = {
-        xPos: hurdleContext.xPos,
-        yPos: hurdleContext.yPos,
-        width: hurdleContext.width
+        // next_xPos: hurdleContext.xPos,
+        // next_yPos: hurdleContext.yPos,
+        next_width: hurdleContext.width,
+        next_type: hurdleContext.typeConfig.type
     }
 
-    const result = { next: nextHurdle, Rex: tRex, status: statusDino, speed: context.currentSpeed};
+    var result = {};
+
+    result = Object.assign(result, tRex, nextHurdle);
+    result.speed = context.currentSpeed;
+    result.status = statusDino;
+    result.distance = hurdleContext.xPos - tRexContext.xPos;
     gameLog.push(result);
 }
 
