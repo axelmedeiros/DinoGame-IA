@@ -17,27 +17,26 @@ export default class GeneticModel extends Model {
   }
 
   crossOver(parents, chromosomes) {
-    // Clone from parents
-    // console.info(parents)
+
     const offspring1 = parents[0];
     const offspring2 = parents[1];
     console.info("off1:",offspring1);
     console.info("off2:",offspring2);
-    // Select a random crossover point
+    // Seleciona um ponto de crossover aleatório
     const crossOverPoint = Math.floor(Math.random() * offspring1.length);
-    console.info("cross here: ",crossOverPoint);
-    // Swap values among parents
+    console.info("Crossover: ",crossOverPoint);
+    // Executa o cruzamento de genes entre os indivíduos pai
     for (let i = 0; i < crossOverPoint; i += 1) {
         const temp = offspring1[i];
         offspring1[i] = offspring2[i];
         offspring2[i] = temp;
     }
     const offspring = [offspring1, offspring2];
-    // Replace the last 2 with the new offspring
+    // Reseleciona os 2 melhores indivíduos
     for (let i = 0; i < 2; i += 1) {
       chromosomes[chromosomes.length - i - 1] = offspring[i];
     }
-    console.info("child: ",offspring)
+    console.info("Filho: ",offspring)
     return offspring;
   }
 

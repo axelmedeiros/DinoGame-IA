@@ -319,9 +319,9 @@ export default class Runner {
 
     const lives = this.tRexGroup.lives();
     if (lives > 0) {
-      this.generationEl.innerText = `GENERATION #${Runner.generation} | LIVE x ${this.tRexGroup.lives()}`;
+      this.generationEl.innerText = `Geração atual: ${Runner.generation} | Quantidade de indivíduos restantes: ${this.tRexGroup.lives()}`;
     } else {
-      this.generationEl.innerHTML = `<div style="color: red;">GENERATION #${Runner.generation}  |  GAME OVER</div>`;
+      this.generationEl.innerHTML = `<div style="color: red;">Geração #${Runner.generation}  |  GAME OVER</div>`;
     }
   }
 
