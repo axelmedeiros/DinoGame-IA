@@ -4,6 +4,7 @@ import { Runner } from '../game';
 import GeneticModel from '../ai/models/genetic/GeneticModel';
 import RandomModel from '../ai/models/random/RandomModel';
 
+// Quantidade de indivíduos de cada geração
 const SAMPLES_COUNT = 15;
 
 let runner = null;
@@ -14,38 +15,37 @@ const geneticModel = new GeneticModel();
 let firstTime = true;
 
 function setup() {
-  // Initialize the game Runner.
+  // Inicializa o game. Runner contém todas as informações sobre o jogo, como velocidade
+  // distancia, obstáculos, por exemplo
   runner = new Runner('.game', {
     DINO_COUNT:SAMPLES_COUNT,
     onReset: handleReset,
     onCrash: handleCrash,
     onRunning: handleRunning
   });
-  // Set runner as a global variable if you need runtime debugging.
+  // Seta o dino como uma variável global
   window.runner = runner;
-  // console.info(runner)
-  // Initialize everything in the game and start the game.
+
+  // Inicializa o jogo.
   runner.init();
 }
 
-
+// Essa função atua quando uma geração inteira morre
 function handleReset(Dinos) {
+
+  // Caso seja a primeira geração, todos os indivíduos seguirão o modelo aleatório
   if (firstTime) {
     firstTime = false;
-    // console.info("in here")
-    // console.info(Dinos)
+
     Dinos.forEach((dino) => {
-      // console.info("happened");
       dino.model = new RandomModel();
       dino.model.init();
     });
   }
+  // Caso contrário a próxima geração é treinada.
   else {
-    // Train the model before restarting.
-    console.info('Training');
+    console.info('Treinando');
     const chromosomes = rankList.map((dino) => dino.model.getChromosome());
-    // console.info(chromosomes)
-    // Clear rankList
     rankList.splice(0);
     geneticModel.fit(chromosomes);
     Dinos.forEach((dino, i) => {
@@ -54,6 +54,8 @@ function handleReset(Dinos) {
   }
 }
 
+// Função que toma a decisão pelo dinossauro, se vai pular ou não.
+// É executada ao iniciar uma geração.
 function handleRunning(dino, state) {
   let action = 0;
   if (!dino.jumping) {
@@ -62,8 +64,10 @@ function handleRunning(dino, state) {
   return action;
 }
 
+
+// Caso o jogo não funcione mais
 function handleCrash(dino) {
-  // console.info("i was called")
+
   if (!rankList.includes(dino)) {
     rankList.unshift(dino);
   }

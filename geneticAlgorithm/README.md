@@ -1,36 +1,29 @@
-# Automating the Chrome Dinosaur game
+# Dinossauro do Chrome usando algoritmo genético
 
-A TensorFlow.js based AI for playing chrome dino game.
+## Como funciona
 
+- O diretório src contém 3 subdiretórios.
+O diretório game contém o jogo em sim, e foi encontrado na internet para que seja usado em nosso projeto
+ai/ contém os modelos que foram usados no projeto, o randômico e o genético.
+game/ contém a execução e o fluxo principal do jogo.
 
-## About
+## Requisitos
 
-![](https://9to5google.files.wordpress.com/2015/06/pterodactyl.png?w=1600&h=1000)
+- NodeJs (qualquer versão).
 
-[Chrome dino game](http://www.omgchrome.com/chrome-easter-egg-trex-game-offline/) is [originally](https://cs.chromium.org/chromium/src/components/neterror/resources/offline.js?q=t-rex+package:%5Echromium$&dr=C&l=7) an easter egg game inside chrome's offline error page.
+## Como rodar
 
+Após clonar esse repositório, vá até este diretório e execue os seguintes comandos:
 
-## About TensorFlow.js
-
-The official version of TensorFlow in JavaScript. It is A WebGL accelerated, browser based JavaScript library for training and deploying ML models.
-Visit the [official website](https://js.tensorflow.org/) to discover more.
-
-
-## About This Project
-This is the code for part 2 of the blog series Automating the Chrome Dinosaur game, in the project we use a Genetic algorithms which is used to play the chrome dino game ,which evolves the dinos into a higher better scoring dino just like actual evolution in nature.
-
-## How to Install
+```sh
+npm install
+```
 
 ```sh
 npm run build
 ```
 
-
-## How to Run
-
-
 ```sh
 npm run start
 ```
-
-Visit http://localhost:8080
+Já é possível acessar a aplicação pelo navegador em: `http://localhost:8080`
